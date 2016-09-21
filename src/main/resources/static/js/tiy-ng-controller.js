@@ -2,7 +2,7 @@ angular.module('TIYAngularApp', [])
    .controller('SampleController', function($scope, $http) {
         $scope.getTodos = function() {
             console.log("About to go get me some data!");
-            $scope.name = "JavaScript Master Guru";
+            $scope.name = "Audrey";
 
             $http.get("/todos.json")
                 .then(
@@ -31,6 +31,23 @@ angular.module('TIYAngularApp', [])
                     },
                     function error(response) {
                         console.log("Unable to toggle todo");
+                    });
+        };
+
+        $scope.deleteTodo = function(todoID) {
+            console.log("About to delete Todo with ID " + todoID);
+
+            $http.get("/deleteTodo.json?todoID=" + todoID)
+//            console.log("In the delete todo function");
+                .then(
+                    function success(response) {
+                    console.log("inside the delete success function")
+                        console.log(response.data);
+                        console.log("ToDo deleted");
+                        $scope.todos = response.data;
+                    },
+                    function error(response) {
+                        console.log("Unable to delete todo");
                     });
         };
 

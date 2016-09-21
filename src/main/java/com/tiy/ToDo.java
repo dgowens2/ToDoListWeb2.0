@@ -24,9 +24,9 @@ public class ToDo {
     public ToDo() {
     }
 
-    public ToDo(String text, boolean not_done, User user) {
+    public ToDo(String text, boolean is_done, User user) {
         this.text = text;
-        this.is_done = not_done;
+        this.is_done = is_done;
         this.user = user;
     }
 

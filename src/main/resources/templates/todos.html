@@ -1,9 +1,9 @@
 <!DOCTYPE html>
 <html lang="en-US" ng-app="TIYAngularApp">
 
-{{! changing the mustache delimiter so it doesn't conflict with  }}
-{{! the default angularjs delimiters - https://mustache.github.io/mustache.5.html for more info  }}
-{{=<% %>=}}
+<!--{{! changing the mustache delimiter so it doesn't conflict with  }}-->
+<!--{{! the default angularjs delimiters - https://mustache.github.io/mustache.5.html for more info  }}-->
+<!--{{=<% %>=}}-->
 
 <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
 <script src="../static/js/tiy-ng-controller.js"></script>
@@ -13,30 +13,39 @@
 
 <div style="position: relative; float: left; width: 100%; padding: 20px;">
     <h1>Hello <span ng-bind="name"></span></h1>
+    <form action="/logout" method="post">
+        <button type="submit">Logout</button>
+    </form>
+    <br><br>
 
     <!--<p>Name : <input type="text" ng-model="name"></p>-->
 
-    {{name}} is ready to add to-dos ... <br/><br/>
+    <!--{{name}} is ready to add to-dos ... <br/><br/>-->
+
+    <!--<%#user%>-->
+    <!--<name> is ready to add to-dos ... <br/><br/>-->
+
 
     <input type="button" ng-click="getTodos()" value="Refresh ToDo List"/>
 </div>
 
 <!--{{#name}}-->
-<p>ToDo Item: <input type="text" ng-model="addTodo"></p> <span>  <input type="button" ng-click="addTodo()" value="Create new Todo"/></span> <br/><br/>
+<div style="position: relative; float: left; width: 40%; padding: 20px;">
+<span><input type="text" placeholder="Insert ToDo Here" ng-model="newTodo.text"/> <input type="button" ng-click="addTodo()" value="Create new Todo"/></span>
+<!--<p>ToDo Item: <input type="text" ng-model="addTodo"></p> <span>  <input type="button" ng-click="addTodo()" value="Create new Todo"/></span> <br/><br/>-->
+</div>
 
 <div style="position: relative; float: left; width: 40%; padding: 20px;">
     <h2>ToDo List</h2>
     <ul>
         <li ng-repeat="todo in todos">
-            {{todo.text}}- {{todo.is_done}}
+            {{todo.text}} - {{todo.is_done}}
             <button ng-click="deleteTodo(todo.id)">delete</button>
             <button ng-click="toggleTodo(todo.id)">toggle</button>
         </li>
     </ul>
-
-
 </div>
-
 <!--{{/name}}-->
+<!--<%/user%>-->
 </body>
 </html>

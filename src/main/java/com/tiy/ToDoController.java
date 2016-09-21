@@ -47,14 +47,17 @@ public class ToDoController {
             }
         }
         model.addAttribute("todos", todoList);
+        model.addAttribute("user", session.getAttribute("user"));
         return "home";
     }
 
     @RequestMapping(path = "/add-todo", method = RequestMethod.POST)
-    public String addToDo(HttpSession session, String toDoName, boolean is_done) {
+    public String addToDo(HttpSession session, String text, boolean is_done) {
         User user = (User) session.getAttribute("user");
-        ToDo todo = new ToDo(toDoName, is_done, user);
-        todos.save(todo);
+        if (text != null) {
+            ToDo todo = new ToDo(text, is_done, user);
+            todos.save(todo);
+        }
         return "redirect:/";
     }
 
@@ -84,13 +87,13 @@ public class ToDoController {
             throw new Exception("Incorrect password");
         }
         session.setAttribute("user", user);
-        return "redirect:/";
+        return "redirect:/todos";
     }
 
     @RequestMapping(path = "/logout", method = RequestMethod.POST)
     public String logout(HttpSession session/*, String userName, User user*/) {
         session.invalidate();
-        return "redirect:/todos";
+        return "redirect:/";
     }
 
     @PostConstruct
@@ -104,7 +107,8 @@ public class ToDoController {
     }
 
     @RequestMapping(path = "/todos", method = RequestMethod.GET)
-    public String todos(Model model, HttpSession session) {
+    public String todos(Model model, HttpSession session, User user, String text, boolean is_done) {
+
         return "todos";
     }
 
